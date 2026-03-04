@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639081103814940873
-    m_Hash: 2090653802
+      ticks: 639081860073167342
+    m_Hash: 4036417335
   m_LockFileStatus:
     m_FilePath: D:/T-card/T-Card/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 639081103815073067
-    m_Hash: 3251474673
+      ticks: 639081860073167342
+    m_Hash: 3367190070
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
