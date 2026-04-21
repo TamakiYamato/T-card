@@ -14,14 +14,12 @@ public class CardManager : MonoBehaviour
 
 
     int m_cardSelectNumber = 0;
-    int addNumber = 1;
 
     /// <summary>
     /// Start
     /// </summary>
     void Start()
-    {
-        
+    {   
     }
 
 
@@ -30,6 +28,8 @@ public class CardManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        ////カードを選択→場に出す////
+        // TODO:if文のネストを無くす。
         if (Input.GetKeyDown(KeyCode.A))
         {
             // カードの選択
@@ -52,9 +52,9 @@ public class CardManager : MonoBehaviour
             // 数字増やす処理
             m_cardSelectNumber++;
             // リストの範囲外に行かないようにする処理
-            if (m_cardSelectNumber > 4)
+            if (m_cardSelectNumber > 3)
             {
-                m_cardSelectNumber = 4;
+                m_cardSelectNumber = 3;
             }
 
             // カードの選択
