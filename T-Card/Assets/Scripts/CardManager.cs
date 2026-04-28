@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
+    [Header("アウトラインコンポーネント"),SerializeField]
+    private List<Outline> _outlineComponent;
+
     [Header("カード"), SerializeField]
     private List<GameObject> _cardObjects;
+
     // カードの移動時の目標ターゲット
     //[Header("移動時の目標ターゲット"),SerializeField]
     public GameObject _cardsMoveTargetObj;
     // カードの移動速度
-    private float _cardMoveSpeed = 0.5f;
-
+    static private float _cardMoveSpeed = 0.5f;
 
     int m_cardSelectNumber = 0;
 
@@ -33,10 +36,9 @@ public class CardManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             // カードの選択
-            // 数字の値が変わってない、、、
-
             // 数字減らす処理
             m_cardSelectNumber--;
+
             // リストの範囲外に行かないようにする処理
             if (m_cardSelectNumber < 0)
             {
@@ -45,7 +47,19 @@ public class CardManager : MonoBehaviour
 
             GameObject Card = _cardObjects[m_cardSelectNumber];
 
-            Debug.Log(m_cardSelectNumber);
+
+            //アウトラインの追加・削除
+            for (int i = 0; i < _outlineComponent.Count; i++)
+            {
+                if (i == m_cardSelectNumber)
+                {
+                    _outlineComponent[i].enabled = true;
+                }
+                else
+                {
+                    _outlineComponent[i].enabled = false;
+                }
+            }
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
@@ -57,10 +71,20 @@ public class CardManager : MonoBehaviour
                 m_cardSelectNumber = 3;
             }
 
+            for (int i = 0; i < _outlineComponent.Count; i++)
+            {
+                if (i == m_cardSelectNumber)
+                {
+                    _outlineComponent[i].enabled = true;
+                }
+                else
+                {
+                    _outlineComponent[i].enabled = false;
+                }
+            }
+
             // カードの選択
             GameObject Card = _cardObjects[m_cardSelectNumber];
-
-            Debug.Log(m_cardSelectNumber);
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
