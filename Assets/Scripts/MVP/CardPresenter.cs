@@ -5,12 +5,18 @@ using UnityEngine;
 /// </summary>
 public class CardPresenter : MonoBehaviour
 {
+
+    [SerializeField] private CardView _view;
+
+    private CardModel _model = new();    // ModelÇÃéQè∆
+
+
     /// <summary>
     /// Start
     /// </summary>
     void Start()
     {
-        
+        _view._pushKey.Subscribe()
     }
 
     /// <summary>
@@ -19,5 +25,11 @@ public class CardPresenter : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    private void CardSelectSetUp()
+    {
+        //_view.
     }
 }

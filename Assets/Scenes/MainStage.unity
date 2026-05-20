@@ -1924,6 +1924,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6651b38e2109de34ead3ec6a7ef17cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardPresenter
+  _view: {fileID: 1859523741}
 --- !u!1 &1861135170 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3fbc6bf3e95b4b145b8ee92da288cbef, type: 3}

@@ -1,3 +1,4 @@
+using R3;
 using UnityEngine;
 
 /// <summary>
@@ -5,6 +6,10 @@ using UnityEngine;
 /// </summary>
 public class CardView : MonoBehaviour
 {
+    // スペースキーを押したときのイベントを発行するObservable
+    public Observable<Unit> _pushKey => 
+        Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.Space));
+
     /// <summary>
     /// Start
     /// </summary>
@@ -19,5 +24,23 @@ public class CardView : MonoBehaviour
     void Update()
     {
         
+    }
+
+
+    /// <summary>
+    /// カード選択時のキー入力
+    /// </summary>
+    public void CardSelect()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            
+        }
+        else if (Input.GetKeyDown(KeyCode.D))
+        {
+        }
+        else if (Input.GetKeyDown(KeyCode.Space))
+        {
+        }
     }
 }

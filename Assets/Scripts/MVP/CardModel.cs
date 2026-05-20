@@ -15,7 +15,10 @@ public class CardModel : MonoBehaviour
     }
     // ”z—ñ‚Ì‚İì¬
     // ‘ã“ü‚ÍStart()‚Ås‚¤
-    public ReactiveProperty<GameObject>[] _cardNumber;
+    private ReactiveProperty<GameObject>[] _cardNumber;
+
+    // ŒöŠJ
+    public ReadOnlyReactiveProperty<GameObject>[] CardNumber => _cardNumber;
 
 
     /// <summary>
