@@ -4,40 +4,25 @@ using UnityEngine;
 /// <summary>
 /// 計算やデータの管理を行うクラス
 /// </summary>
-public class CardModel : MonoBehaviour
+public class CardModel
 {
-    // カードの種類(enum→定数)
-    public enum Cards
+    private readonly ReactiveProperty<int> _selectedCardIndex = new(0);    // 選択されたカードのインデックス
+    //private readonly ReactiveProperty<int> _selectedCardIndex = new ReactiveProperty<int>(0);    // 選択されたカードのインデックス
+
+    // 読み取り専用のプロパティ？
+    public ReadOnlyReactiveProperty<int> SelectedCardIndex => _selectedCardIndex;    // 読み取り専用のReactiveProperty
+
+    public void SelectCard(bool add)
     {
-        King,       // 王様
-        Slave,      // 奴隷
-        Citizen,    // 市民
-    }
-    // 配列のみ作成
-    // 代入はStart()で行う
-    private ReactiveProperty<GameObject>[] _cardNumber;
-
-    // 公開
-    public ReadOnlyReactiveProperty<GameObject>[] CardNumber => _cardNumber;
-
-
-    /// <summary>
-    /// Start
-    /// </summary>
-    void Start()
-    {
-        // 配列にEnumのカードの種類を入れる処理
-        var enumValues = System.Enum.GetValues(typeof(Cards));
-        // _cardNumberの配列を実体化
-        _cardNumber = new ReactiveProperty<GameObject>[enumValues.Length];
+        // indexを進めるか後退させるかを判断する必要あり
+        if(add)
+        {
+            _selectedCardIndex.Value++;
+        }
+        else
+        {
+            _selectedCardIndex.Value--;
+        }
     }
 
-
-    /// <summary>
-    /// Update
-    /// </summary>
-    void Update()
-    {
-        
-    }
 }

@@ -7,8 +7,18 @@ using UnityEngine;
 public class CardView : MonoBehaviour
 {
     // スペースキーを押したときのイベントを発行するObservable
-    public Observable<Unit> _pushKey => 
+    // A、D、スペース
+    public Observable<Unit> _pushRightKey => 
+        Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.D));
+
+    public Observable<Unit> _pushLeftKey =>
+        Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.A));
+    public Observable<Unit> _pushSpaceKey =>
         Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.Space));
+
+
+    public void SetHogeNumber(int cardSelectNumber) => ShowSelectCardNumber(cardSelectNumber);
+
 
     /// <summary>
     /// Start
@@ -42,5 +52,10 @@ public class CardView : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space))
         {
         }
+    }
+
+    public void ShowSelectCardNumber(int hogeNumber)
+    {
+        Debug.Log($"hogeNumber: {hogeNumber}");
     }
 }
