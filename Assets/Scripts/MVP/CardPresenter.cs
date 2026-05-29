@@ -7,7 +7,8 @@ using UnityEngine;
 public class CardPresenter : MonoBehaviour
 {
 
-    [SerializeField] private CardView _view;
+    [Header("Viewコンポーネント"),SerializeField]
+    private CardView _view;
 
     private CardModel _model = new();    // Modelの参照
 
@@ -20,17 +21,20 @@ public class CardPresenter : MonoBehaviour
         // A、D、スペースキーが押されたときのイベントを購読して、ModelのSelectCardメソッドを呼び出す
         _view._pushRightKey.Subscribe(_ =>
             {
-                _model.SelectCard(true); // 例: カードのインデックス0を選択
+                _model.SelectCard(true,false); // 例: カードのインデックス0を選択
             })
         .AddTo(this);
 
         _view._pushLeftKey.Subscribe(_ =>
+            {
+                _model.SelectCard(false,false); // 例: カードのインデックス0を選択
+            })
+        .AddTo(this);
+        _view._pushSpaceKey.Subscribe(_ =>
         {
-            _model.SelectCard(false); // 例: カードのインデックス0を選択
+            _model.SelectCard(true,false); // 例: カードのインデックス0を選択
         })
         .AddTo(this);
-
-        // 3つ作る！ trueは右、falseは左とする
 
         // 選択しているカードの番号を取得してViewで表示する
         GetSelectCardNumber();
@@ -45,17 +49,9 @@ public class CardPresenter : MonoBehaviour
         _model.SelectedCardIndex.Subscribe(_view.ShowSelectCardNumber);
     }
 
-    /// <summary>
-    /// Update
-    /// </summary>
-    void Update()
-    {
-        
-    }
-
-
     private void CardSelectSetUp()
     {
-        //_view.
+        // カードの移動処理
+        //public ReadOnlyReactiveProperty<float> SelectCardPoint => 
     }
 }

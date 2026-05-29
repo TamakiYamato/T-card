@@ -1917,7 +1917,6 @@ MonoBehaviour:
   - {fileID: 550806399}
   - {fileID: 1324919930}
   - {fileID: 1669742107}
-  _cardMovePoint: {fileID: 1445091990}
   _outlineComponent:
   - {fileID: 1011218785}
   - {fileID: 550806403}
