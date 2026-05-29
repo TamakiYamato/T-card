@@ -10,6 +10,8 @@ public class CardManager : MonoBehaviour
     [Header("カード"), SerializeField]
     private List<GameObject> _cardObjects;
 
+    GameManager _gameManager;
+
     // カードの移動時の目標ターゲット
     //[Header("移動時の目標ターゲット"),SerializeField]
     public GameObject _cardsMoveTargetObj;
@@ -18,11 +20,14 @@ public class CardManager : MonoBehaviour
 
     int m_cardSelectNumber = 0;
 
+    bool selectFlg = false;
+
     /// <summary>
     /// Start
     /// </summary>
     void Start()
-    {   
+    {
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
 
@@ -31,6 +36,10 @@ public class CardManager : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (selectFlg)
+        {
+            return;
+        }
         ////カードを選択→場に出す////
         // TODO:if文のネストを無くす。
         if (Input.GetKeyDown(KeyCode.A))
@@ -95,6 +104,10 @@ public class CardManager : MonoBehaviour
                     _cardsMoveTargetObj.transform.position,
                     _cardMoveSpeed
                 );
+
+            _gameManager.PlayerCardsJudge(m_cardSelectNumber);
+
+            selectFlg = true;
         }
     }
 }
