@@ -1,45 +1,49 @@
 using R3;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 /// <summary>
 /// 計算やデータの管理を行うクラス
 /// </summary>
 public class CardModel
 {
-    enum PushKeyType
-    {
-        AKey,       // Aキー(0)
-        BKey,       // Bキー(1)
-        SpaceKey,   // スペースキー(2)
-    }
-
-    const int _maxCardValue = 4;    // カードの最大数
-    const int _minCardValue = 0;    // カードの最小数
-
+    // カードの選択状態を管理するプロパティ
     private readonly ReactiveProperty<int> _selectedCardIndex = new(0);    // 選択されたカードのインデックス
-
-    // 読み取り専用のプロパティ？
     public ReadOnlyReactiveProperty<int> SelectedCardIndex => _selectedCardIndex;    // 読み取り専用のReactiveProperty
 
-    public void SelectCard(bool add,bool move)
+
+    /// <summary>
+    /// カード選択
+    /// </summary>
+    public void SelectCard(bool add)
     {
         // indexを進めるか後退させるかを判断する必要あり
-
-
         // カードのインデックスを範囲内に収めるための処理
-        //_selectedCardIndex.Value = Mathf.Clamp(_selectedCardIndex.Value, _minCardValue, _maxCardValue);
 
-        if (add&&!move)
+        if (add)
         {
             _selectedCardIndex.Value++;
         }
-        else if(!add&&!move)
+        else
         {
             _selectedCardIndex.Value--;
         }
-        else 
-        {
-            
-        }
+
+        // 三項演算子バージョン
+        //_selectedCardIndex.Value += add ? 1 : -1;
+
+    }
+
+
+    /// <summary>
+    /// カードの移動処理
+    /// </summary>
+    public void DecisionCard()
+    {
+        // 決定されてた
+        Debug.Log("カード決定");
+
+        // 決定するとカードの選択を行えないようにする
+        
     }
 }
