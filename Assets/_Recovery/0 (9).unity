@@ -2921,7 +2921,6 @@ GameObject:
   - component: {fileID: 1859523742}
   - component: {fileID: 1859523741}
   - component: {fileID: 1859523743}
-  - component: {fileID: 1859523744}
   m_Layer: 0
   m_Name: CardManager
   m_TagString: Untagged
@@ -2998,24 +2997,6 @@ MonoBehaviour:
   - {fileID: 1324919930}
   - {fileID: 1669742107}
   _cardsMoveTargetObj: {fileID: 1445091990}
-  _showCardOutline: {fileID: 1859523744}
---- !u!114 &1859523744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859523737}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a97128f7eb14c0f4a849ebf3b83de65e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShowCardOutline
-  _allCards:
-  - {fileID: 1011218781}
-  - {fileID: 550806399}
-  - {fileID: 1324919930}
-  - {fileID: 1669742107}
 --- !u!1 &1877145533
 GameObject:
   m_ObjectHideFlags: 0
