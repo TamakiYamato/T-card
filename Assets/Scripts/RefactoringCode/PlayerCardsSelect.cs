@@ -15,11 +15,15 @@ public class PlayerCardsSelect : MonoBehaviour
     [Header("ターゲット"), SerializeField]
     public ShowCardOutline _showCardOutline;
 
+    [Header("ジャッジコンポーネント"), SerializeField]
+    public JudgeSystem _judgeSystem;
+
     // カード選択の番号
     int m_cardSelectNumber = 0;
 
     // カードの移動速度
     static private float _cardMoveSpeed = 0.5f;
+
 
 
     private void Update()
@@ -33,7 +37,6 @@ public class PlayerCardsSelect : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             m_cardSelectNumber--;
-
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
@@ -43,6 +46,8 @@ public class PlayerCardsSelect : MonoBehaviour
         {
             // カード選択決定
             SelectCardSetUp();
+
+            _judgeSystem.PlayerCardsJudge(m_cardSelectNumber);
         }
         
         // カード選択の範囲を0～3に制限

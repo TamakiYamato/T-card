@@ -2329,6 +2329,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511017122}
   m_CullTransparentMesh: 1
+--- !u!1 &1576161275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1576161277}
+  - component: {fileID: 1576161276}
+  m_Layer: 0
+  m_Name: JudgeSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1576161276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576161275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e8ca60419a9cdb4f9907d276c5c7d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::JudgeSystem
+  _menuCanvas: {fileID: 0}
+  _resultText: {fileID: 0}
+--- !u!4 &1576161277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1576161275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.10122, y: 4.32965, z: -0.72437}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1669742106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2840,7 +2886,7 @@ MonoBehaviour:
   - {fileID: 1669742107}
   _cardsMoveTargetObj: {fileID: 1445091990}
   _showCardOutline: {fileID: 1859523744}
-  _judgeSystem: {fileID: 1859523746}
+  _judgeSystem: {fileID: 1576161276}
 --- !u!114 &1859523744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2858,7 +2904,7 @@ MonoBehaviour:
   - {fileID: 550806399}
   - {fileID: 1324919930}
   - {fileID: 1669742107}
-  _judgeSystem: {fileID: 1859523746}
+  _judgeSystem: {fileID: 1576161276}
 --- !u!114 &1859523745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2877,7 +2923,7 @@ MonoBehaviour:
   - {fileID: 1993694142}
   - {fileID: 945183670}
   _aiCardsMoveTargetObj: {fileID: 376584447}
-  _judgeSystem: {fileID: 1859523746}
+  _judgeSystem: {fileID: 1576161276}
 --- !u!114 &1859523746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2890,7 +2936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e8ca60419a9cdb4f9907d276c5c7d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JudgeSystem
-  _menuCanvas: {fileID: 879405978}
+  _menuCanvas: {fileID: 944798196}
   _resultText: {fileID: 1511017124}
 --- !u!1 &1877145533
 GameObject:
@@ -3241,6 +3287,7 @@ SceneRoots:
   - {fileID: 1877145534}
   - {fileID: 77353157}
   - {fileID: 1859523739}
+  - {fileID: 1576161277}
   - {fileID: 944798197}
   - {fileID: 1197566793}
   - {fileID: 787356275}

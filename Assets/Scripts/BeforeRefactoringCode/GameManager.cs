@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -18,11 +19,8 @@ public class GameManager : MonoBehaviour
     int playerSelectCardNumber = 0;
     int aiSelectCardNumber = 0;
 
-    [Header("Winテキスト"), SerializeField]
-    GameObject _playerWinText;
-
-    [Header("Loseテキスト"), SerializeField]
-    GameObject _playerLoseText;
+    [Header("リザルトテキスト"), SerializeField]
+    TextMeshProUGUI _resultText;    
 
     [Header("キャンバス"), SerializeField]
     GameObject _menuCanvas;
@@ -87,33 +85,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// プレイヤーの勝利判定
+    /// </summary>
+    /// <returns></returns>
+    private bool IsPlayerWin()
+    {
+        return _playerCardsState == Cards.King && _aiCardsState == Cards.Citizen ||
+               _playerCardsState == Cards.Citizen && _aiCardsState == Cards.Slave;
+    }
+
+
+
     private void CheckAndJudge()
     {
-        // 王様勝利
-        if (_playerCardsState == Cards.King && _aiCardsState == Cards.Citizen)
+        // プレイヤーの勝利
+        if (IsPlayerWin())
         {
             // WinnerPlayer
-            Debug.Log("プレイヤーの勝ち");
+            Debug.Log("Win");
 
             ShowMenuCanvas();
-            ShowWinText();
-        }
-        else if(_playerCardsState == Cards.Citizen && _aiCardsState == Cards.Slave)
-        {
-            // WinnerPlayer
-            Debug.Log("プレイヤーの勝ち");
-
-            ShowMenuCanvas();
-            ShowWinText();
+            ShowResultText("プレイヤーの勝ち");
         }
         // 奴隷勝利
         else if (_playerCardsState == Cards.King && _aiCardsState == Cards.Slave)
         {
             // WiinerAI
-            Debug.Log("AIの勝ち");
-
+            Debug.Log("Lose...");
             ShowMenuCanvas();
-            ShowLoseText();
+            ShowResultText("AIの勝ち");
         }
         // 引き分け
         else
@@ -138,15 +139,10 @@ public class GameManager : MonoBehaviour
         _playerCameraScript.enabled = false;
     }
 
-    private void ShowWinText()
+    private void ShowResultText(string resultText)
     {
-        // 勝利テキスト表示
-        _playerWinText.SetActive(true);
-    }
-
-    private void ShowLoseText()
-    {
-        // 敗北テキスト表示
-        _playerLoseText.SetActive(true);
+        // リザルトテキスト表示
+        _resultText.text = resultText;
+        _resultText.gameObject.SetActive(true);
     }
 }

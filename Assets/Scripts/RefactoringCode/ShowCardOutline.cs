@@ -9,6 +9,10 @@ public class ShowCardOutline : MonoBehaviour
     [Header("カード"), SerializeField]
     private List<GameObject> _allCards;
 
+    // 
+    [Header("ジャッジコンポーネント"), SerializeField]
+    public JudgeSystem _judgeSystem;
+
 
     public void ShowOutline(GameObject seletCard)
     {
