@@ -28,9 +28,9 @@ public class JudgeSystem : MonoBehaviour
     public void PlayerCardsJudge(int playerCardNumber)
     {
         // ここ要らんかも
-        playerSelectCardNumber = playerCardNumber;
+        //playerSelectCardNumber = playerCardNumber;
 
-        switch (playerSelectCardNumber)
+        switch (playerCardNumber)
         {
             case 0:
                 Debug.Log("プレイヤーは王様を選びました");
@@ -51,9 +51,9 @@ public class JudgeSystem : MonoBehaviour
     public void AiCardsJudge(int aiCardNumber)
     {
         // ここ要らんかも
-        aiSelectCardNumber = aiCardNumber;
+        //aiSelectCardNumber = aiCardNumber;
 
-        switch (aiSelectCardNumber)
+        switch (aiCardNumber)
         {
             case 0:
                 Debug.Log("AIは奴隷を選びました");
@@ -66,8 +66,6 @@ public class JudgeSystem : MonoBehaviour
 
                 break;
         }
-
-        CheckAndJudge();
     }
 
 
@@ -123,16 +121,6 @@ public class JudgeSystem : MonoBehaviour
 
 
     /// <summary>
-    /// 
-    /// </summary>
-    private void ShowMenuCanvas()
-    {
-        // キャンバス表示
-        _menuCanvas.SetActive(true);
-    }
-
-
-    /// <summary>
     /// テキストの文字をWinかLoseに文字を変更
     /// </summary>
     private void ShowResultText(string resultText)
@@ -142,8 +130,4 @@ public class JudgeSystem : MonoBehaviour
         _resultText.text = resultText;
         _resultText.gameObject.SetActive(true);
     }
-
-
-    // 勝敗ごとにリザルトテキストの文字は変更されている。
-    // シーン開始字にキャンバスの中身が表示されているので修正。
 }
