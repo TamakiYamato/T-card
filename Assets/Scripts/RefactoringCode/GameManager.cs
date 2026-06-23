@@ -1,8 +1,7 @@
 using TMPro;
 using UnityEngine;
-using static GameManager;
 
-public class JudgeSystem : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public enum CardType
     {
@@ -13,23 +12,25 @@ public class JudgeSystem : MonoBehaviour
     CardType _playerCardsState = CardType.King;
     CardType _aiCardsState = CardType.Slave;
 
-    // ここ要らんかも
-    int playerSelectCardNumber = 0;
-    int aiSelectCardNumber = 0;
-
-
     [Header("キャンバス"), SerializeField]
     GameObject _menuCanvas;
 
     [Header("リザルトテキスト"), SerializeField]
     TextMeshProUGUI _resultText;
 
+    [Header("リザルトテキスト"), SerializeField]
+    PlayerCamera _playerCamera;
 
-    public void PlayerCardsJudge(int playerCardNumber)
+
+    private void Start()
     {
-        // ここ要らんかも
-        //playerSelectCardNumber = playerCardNumber;
+        // キャンバスとマウスカーソルは最初は非表示
+        _menuCanvas.SetActive(false);
+        Cursor.visible = false;
+    }
 
+    public void PlayerCardsJudge(int playerCardNumber = 0)
+    {
         switch (playerCardNumber)
         {
             case 0:
@@ -48,11 +49,8 @@ public class JudgeSystem : MonoBehaviour
     }
 
 
-    public void AiCardsJudge(int aiCardNumber)
+    public void AiCardsJudge(int aiCardNumber = 0)
     {
-        // ここ要らんかも
-        //aiSelectCardNumber = aiCardNumber;
-
         switch (aiCardNumber)
         {
             case 0:
@@ -121,13 +119,15 @@ public class JudgeSystem : MonoBehaviour
 
 
     /// <summary>
-    /// テキストの文字をWinかLoseに文字を変更
+    /// テキストの文字をWinかLoseに文字を変更し、リザルトとマウスカーソルを表示
     /// </summary>
-    private void ShowResultText(string resultText)
+    private void ShowResultText(string resultText = "")
     {
-        // リザルトテキスト表示
+        // リザルトとマウスカーソルを表示
         _menuCanvas.SetActive(true);
         _resultText.text = resultText;
-        _resultText.gameObject.SetActive(true);
+        Cursor.visible = true;
+
+        _playerCamera.enabled = false;
     }
 }

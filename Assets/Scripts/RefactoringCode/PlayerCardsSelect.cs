@@ -15,8 +15,8 @@ public class PlayerCardsSelect : MonoBehaviour
     [Header("ターゲット"), SerializeField]
     public ShowCardOutline _showCardOutline;
 
-    [Header("ジャッジコンポーネント"), SerializeField]
-    public JudgeSystem _judgeSystem;
+    [Header("ゲームマネージャー"), SerializeField]
+    public GameManager _gameManager;
 
     // カード選択の番号
     int m_cardSelectNumber = 0;
@@ -47,7 +47,7 @@ public class PlayerCardsSelect : MonoBehaviour
             // カード選択決定
             SelectCardSetUp();
 
-            _judgeSystem.PlayerCardsJudge(m_cardSelectNumber);
+            _gameManager.PlayerCardsJudge(m_cardSelectNumber);
         }
         
         // カード選択の範囲を0～3に制限

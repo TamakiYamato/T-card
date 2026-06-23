@@ -9,8 +9,8 @@ public class AiCardsSelect : MonoBehaviour
     [Header("移動時の目標ターゲット"),SerializeField]
     public GameObject _aiCardsMoveTargetObj;
 
-    [Header("ジャッジコンポーネント"), SerializeField]
-    public JudgeSystem _judgeSystem;
+    [Header("ゲームマネージャー"), SerializeField]
+    public GameManager _gameManager;
 
 
     // カードの移動速度
@@ -27,6 +27,6 @@ public class AiCardsSelect : MonoBehaviour
                     _cardMoveSpeed
                 );
 
-        _judgeSystem.AiCardsJudge(m_cardSelectNumber);
+        _gameManager.AiCardsJudge(m_cardSelectNumber);
     }
 }
