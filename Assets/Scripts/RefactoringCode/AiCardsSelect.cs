@@ -17,10 +17,10 @@ public class AiCardsSelect : MonoBehaviour
     private float _cardMoveSpeed = 0.5f;
 
 
-    void Start()
+    public void SelectCard()
     {
-        // 0～3の範囲でランダムに選出
-        int m_cardSelectNumber = Random.Range(0, 3);
+        // カードのリスト範囲でランダムに選出
+        int m_cardSelectNumber = Random.Range(0, _aiCardObjects.Count);
         _aiCardObjects[m_cardSelectNumber].transform.position = Vector3.MoveTowards(
                     _aiCardObjects[m_cardSelectNumber].transform.position,
                     _aiCardsMoveTargetObj.transform.position,
@@ -28,5 +28,7 @@ public class AiCardsSelect : MonoBehaviour
                 );
 
         _gameManager.AiCardsJudge(m_cardSelectNumber);
-    }
+
+        _aiCardObjects.RemoveAt(m_cardSelectNumber);
+    } 
 }

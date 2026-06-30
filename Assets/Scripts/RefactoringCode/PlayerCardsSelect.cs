@@ -21,6 +21,8 @@ public class PlayerCardsSelect : MonoBehaviour
     // カード選択の番号
     int m_cardSelectNumber = 0;
 
+    private int _maxCardSelectNumber = 3;
+
     // カードの移動速度
     static private float _cardMoveSpeed = 0.5f;
 
@@ -51,7 +53,7 @@ public class PlayerCardsSelect : MonoBehaviour
         }
         
         // カード選択の範囲を0～3に制限
-        m_cardSelectNumber = Mathf.Clamp(m_cardSelectNumber, 0, 3);
+        m_cardSelectNumber = Mathf.Clamp(m_cardSelectNumber, 0, _maxCardSelectNumber);
 
         OutlineSetUp();
     }

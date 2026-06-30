@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     CardType _playerCardsState = CardType.King;
     CardType _aiCardsState = CardType.Slave;
 
+    [Header("AI選択クラス"), SerializeField]
+    private AiCardsSelect _aiCardsSelect;
+
     [Header("キャンバス"), SerializeField]
     GameObject _menuCanvas;
 
@@ -27,23 +30,21 @@ public class GameManager : MonoBehaviour
         // キャンバスとマウスカーソルは最初は非表示
         _menuCanvas.SetActive(false);
         Cursor.visible = false;
+
+        StartTurn();
     }
+
+
+    private void StartTurn()
+    {
+        // AIのカードを選択
+        _aiCardsSelect.SelectCard();
+    }
+
 
     public void PlayerCardsJudge(int playerCardNumber = 0)
     {
-        switch (playerCardNumber)
-        {
-            case 0:
-                Debug.Log("プレイヤーは王様を選びました");
-                _playerCardsState = CardType.King;
-
-                break;
-            default:
-                Debug.Log("プレイヤーは王様以外を選びました");
-                _playerCardsState = CardType.Citizen;
-
-                break;
-        }
+        _playerCardsState = playerCardNumber == 0 ? CardType.King : CardType.Citizen;
 
         CheckAndJudge();
     }
@@ -51,19 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void AiCardsJudge(int aiCardNumber = 0)
     {
-        switch (aiCardNumber)
-        {
-            case 0:
-                Debug.Log("AIは奴隷を選びました");
-                _aiCardsState = CardType.Slave;
-
-                break;
-            default:
-                Debug.Log("AIは奴隷以外を選びました");
-                _aiCardsState = CardType.Citizen;
-
-                break;
-        }
+        _aiCardsState = aiCardNumber == 0 ? CardType.Slave : CardType.Citizen;
     }
 
 
@@ -114,6 +103,8 @@ public class GameManager : MonoBehaviour
         {
             // Draw
             Debug.Log("引き分け");
+
+            StartTurn();
         }
     }
 
