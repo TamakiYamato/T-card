@@ -3048,6 +3048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CanvasPresenter
   _view: {fileID: 1859523748}
+  _gameManager: {fileID: 1859523746}
 --- !u!114 &1859523748
 MonoBehaviour:
   m_ObjectHideFlags: 0

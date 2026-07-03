@@ -1,7 +1,7 @@
 using R3;
 using UnityEngine;
 
-public class CanvasModel : MonoBehaviour
+public class CanvasModel
 {
     private ReactiveProperty<int> _trunNumber = new(0);    // ƒ^[ƒ“”‚ÌŠÇ—
 

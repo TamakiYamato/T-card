@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     CardType _playerCardsState = CardType.King;
     CardType _aiCardsState = CardType.Slave;
 
+    private CanvasModel _canvasModel;
+
     [Header("AI選択クラス"), SerializeField]
     private AiCardsSelect _aiCardsSelect;
 
@@ -35,8 +37,18 @@ public class GameManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public void SetCanvasModel(CanvasModel model)
+    {
+        _canvasModel = model;
+    }
+
+
     private void StartTurn()
     {
+        _canvasModel.AddTurnNumber();
         // AIのカードを選択
         _aiCardsSelect.SelectCard();
     }
