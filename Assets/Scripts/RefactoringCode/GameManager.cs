@@ -23,10 +23,13 @@ public class GameManager : MonoBehaviour
     [Header("リザルトテキスト"), SerializeField]
     TextMeshProUGUI _resultText;
 
-    [Header("リザルトテキスト"), SerializeField]
+    [Header("カメラスクリプト"), SerializeField]
     PlayerCamera _playerCamera;
 
 
+    /// <summary>
+    /// Start
+    /// </summary>
     private void Start()
     {
         // キャンバスとマウスカーソルは最初は非表示
@@ -38,7 +41,7 @@ public class GameManager : MonoBehaviour
 
 
     /// <summary>
-    /// 
+    /// CanvasModelをセット
     /// </summary>
     public void SetCanvasModel(CanvasModel model)
     {
@@ -49,6 +52,8 @@ public class GameManager : MonoBehaviour
     private void StartTurn()
     {
         _canvasModel.AddTurnNumber();
+
+        
         // AIのカードを選択
         _aiCardsSelect.SelectCard();
     }
@@ -97,25 +102,16 @@ public class GameManager : MonoBehaviour
         // プレイヤーの勝利
         if (IsPlayerWin())
         {
-            // WinnerPlayer
-            Debug.Log("プレイヤーの勝ち");
-            //ShowMenuCanvas();
             ShowResultText("Your Win!");
         }
         // AIの勝利
         else if (IsAiWin())
         {
-            // WiinerAI
-            Debug.Log("AIの勝ち");
-            //ShowMenuCanvas();
             ShowResultText("Your Lose...");
         }
         // 引き分け
         else
         {
-            // Draw
-            Debug.Log("引き分け");
-
             StartTurn();
         }
     }

@@ -13,15 +13,26 @@ public class CanvasPresenter : MonoBehaviour
 
 
     /// <summary>
+    /// Awake
+    /// </summary>
+    private void Awake()
+    {
+        _gameManager.SetCanvasModel(_model);
+    }
+
+    /// <summary>
     /// Start
     /// </summary>
     void Start()
     {
-        _gameManager.SetCanvasModel(_model);
-
         _model.TurnNumber.Subscribe(turnNumber =>
         {
             _view.UpdateTurnText(turnNumber);
         }).AddTo(this);
+
+        //_model.FinallApha.Subscribe(alpha =>
+        //{
+        //    _view.UpdateFadeOutAlpha(alpha);
+        //}).AddTo(this);
     }
 }
