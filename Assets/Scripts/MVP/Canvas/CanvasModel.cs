@@ -12,7 +12,7 @@ public class CanvasModel
 
 
 
-    private float _time = 0.0f;
+    //private float _time = 0.0f;
 
     /// <summary>
     /// ƒ^[ƒ“”‚ğ‘‚â‚·

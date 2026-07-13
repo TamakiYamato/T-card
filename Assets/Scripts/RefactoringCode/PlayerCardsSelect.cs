@@ -27,13 +27,18 @@ public class PlayerCardsSelect : MonoBehaviour
     static private float _cardMoveSpeed = 0.5f;
 
 
-
+    /// <summary>
+    /// Update
+    /// </summary>
     private void Update()
     {   
         CardSelect();
     }
 
 
+    /// <summary>
+    /// カード選択
+    /// </summary>
     private void CardSelect() 
     {
         if (Input.GetKeyDown(KeyCode.A))
@@ -49,7 +54,7 @@ public class PlayerCardsSelect : MonoBehaviour
             // カード選択決定
             SelectCardSetUp();
 
-            _gameManager.PlayerCardsJudge(m_cardSelectNumber);
+            _gameManager.SetPlayerCard(m_cardSelectNumber);
         }
         
         // カード選択の範囲を0～3に制限

@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private bool hoge = false;
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        // Œˆ’…‚ª‚Â‚­‚Ü‚ÅƒQ[ƒ€‚ğ‘±‚¯‚é
+        while (hoge)
+        {
+
+        }
     }
 }

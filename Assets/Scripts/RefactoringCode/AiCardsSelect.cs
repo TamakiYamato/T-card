@@ -27,9 +27,7 @@ public class AiCardsSelect : MonoBehaviour
                     _cardMoveSpeed
                 );
 
-        _gameManager.AiCardsJudge(m_cardSelectNumber);
-
-        Debug.Log($"選ばれたカード: {m_cardSelectNumber}, 残り: {_aiCardObjects.Count}枚");
+        _gameManager.SetAiCard(m_cardSelectNumber);
 
         _aiCardObjects.RemoveAt(m_cardSelectNumber);
     } 

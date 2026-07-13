@@ -3,16 +3,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public enum CardType
-    {
-        King = 0,
-        Slave = 1,
-        Citizen = 2
-    }
-    CardType _playerCardsState = CardType.King;
-    CardType _aiCardsState = CardType.Slave;
-
     private CanvasModel _canvasModel;
+    private CardsAffinity _cardsAffinity = new CardsAffinity();
 
     [Header("AI選択クラス"), SerializeField]
     private AiCardsSelect _aiCardsSelect;
@@ -27,6 +19,10 @@ public class GameManager : MonoBehaviour
     PlayerCamera _playerCamera;
 
 
+    private int? _playerCardNumber;
+    private int? _aiCardNumber;
+
+
     /// <summary>
     /// Start
     /// </summary>
@@ -36,7 +32,10 @@ public class GameManager : MonoBehaviour
         _menuCanvas.SetActive(false);
         Cursor.visible = false;
 
-        StartTurn();
+        _canvasModel.AddTurnNumber();
+
+        // AIのカードを選択
+        _aiCardsSelect.SelectCard();
     }
 
 
@@ -48,78 +47,48 @@ public class GameManager : MonoBehaviour
         _canvasModel = model;
     }
 
-
-    private void StartTurn()
+    /// <summary>
+    /// プレイヤーのカード番号をセット
+    /// </summary>
+    public void SetPlayerCard(int playerCardNumber = 0)
     {
-        _canvasModel.AddTurnNumber();
+        _playerCardNumber = playerCardNumber;
 
-        
-        // AIのカードを選択
-        _aiCardsSelect.SelectCard();
-    }
-
-
-    public void PlayerCardsJudge(int playerCardNumber = 0)
-    {
-        _playerCardsState = playerCardNumber == 0 ? CardType.King : CardType.Citizen;
-
-        CheckAndJudge();
-    }
-
-
-    public void AiCardsJudge(int aiCardNumber = 0)
-    {
-        _aiCardsState = aiCardNumber == 0 ? CardType.Slave : CardType.Citizen;
+        TryJudge();
     }
 
 
     /// <summary>
-    /// プレイヤーの勝利判定
+    /// AIのカード番号をセット
     /// </summary>
-    /// <returns></returns>
-    private bool IsPlayerWin()
+    public void SetAiCard(int aiCardNumber)
     {
-        return _playerCardsState == CardType.King && _aiCardsState == CardType.Citizen ||
-               _playerCardsState == CardType.Citizen && _aiCardsState == CardType.Slave;
+        _aiCardNumber = aiCardNumber;
+
+        TryJudge();
     }
 
 
     /// <summary>
-    /// AIの勝利判定
+    /// 判定開始
     /// </summary>
-    /// <returns></returns>
-    private bool IsAiWin()
+    private void TryJudge()
     {
-        return _playerCardsState == CardType.King && _aiCardsState == CardType.Slave;
-    }
+        if (_playerCardNumber == null || _aiCardNumber == null)
+        {
+            Debug.Log("ぬるぽ");
+            return;
+        }
 
-
-    /// <summary>
-    /// 勝敗判定
-    /// </summary>
-    private void CheckAndJudge()
-    {
-        // プレイヤーの勝利
-        if (IsPlayerWin())
-        {
-            ShowResultText("Your Win!");
-        }
-        // AIの勝利
-        else if (IsAiWin())
-        {
-            ShowResultText("Your Lose...");
-        }
-        // 引き分け
-        else
-        {
-            StartTurn();
-        }
+        Debug.Log("のっとぬるぽ");
+        // 勝敗判定
+        _cardsAffinity.CardsJudge(_playerCardNumber.Value, _aiCardNumber.Value);
     }
 
 
     /// <summary>
     /// テキストの文字をWinかLoseに文字を変更し、リザルトとマウスカーソルを表示
-    /// </summary>
+    /// <summary>
     private void ShowResultText(string resultText = "")
     {
         // リザルトとマウスカーソルを表示
