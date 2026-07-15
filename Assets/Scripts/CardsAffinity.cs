@@ -6,6 +6,13 @@ using UnityEngine;
 /// </summary>
 public  class CardsAffinity
 {
+    public enum JudgeResult
+    {
+        PlayerWin,
+        AiWin,
+        Draw
+    }
+
     public enum CardType
     {
         King = 0,
@@ -49,22 +56,28 @@ public  class CardsAffinity
     /// <summary>
     /// 勝敗判定
     /// </summary>
-    private void CheckAndJudge()
+    public JudgeResult CheckAndJudge()
     {
         //プレイヤーの勝利
         if (IsPlayerWin())
         {
             Debug.Log("プレイヤーの勝利");
+
+            return JudgeResult.PlayerWin;
         }
         // AIの勝利
         else if (IsAiWin())
         {
             Debug.Log("AIの勝利");
+
+            return JudgeResult.AiWin;
         }
         // 引き分け
         else
         {
             Debug.Log("引き分け");
+
+            return JudgeResult.Draw;
         }
     }
 }

@@ -83,6 +83,21 @@ public class GameManager : MonoBehaviour
         Debug.Log("ÇÃÇ¡Ç∆Ç ÇÈÇ€");
         // èüîsîªíË
         _cardsAffinity.CardsJudge(_playerCardNumber.Value, _aiCardNumber.Value);
+        var result = _cardsAffinity.CheckAndJudge();
+
+        // èüîsåãâ Çï\é¶
+        switch (result)
+        {
+            case CardsAffinity.JudgeResult.PlayerWin:
+                ShowResultText("Your Win!");
+                break;
+            case CardsAffinity.JudgeResult.AiWin:
+                ShowResultText("You Lose...");
+                break;
+            case CardsAffinity.JudgeResult.Draw:
+                //ShowResultText("Draw");
+                break;
+        }
     }
 
 
