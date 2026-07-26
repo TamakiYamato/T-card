@@ -18,6 +18,10 @@ public class PlayerCardsSelect : MonoBehaviour
     [Header("ゲームマネージャー"), SerializeField]
     public GameManager _gameManager;
 
+    [Header("カウントダウン"), SerializeField]
+    public CanvasManager _canvasManager;
+
+
     // カード選択の番号
     int m_cardSelectNumber = 0;
 
@@ -26,6 +30,8 @@ public class PlayerCardsSelect : MonoBehaviour
     // カードの移動速度
     static private float _cardMoveSpeed = 0.5f;
 
+    [Header("ステータス"), SerializeField]
+    private List<CardStatus> _cardStatus;
 
     /// <summary>
     /// Update
@@ -49,12 +55,14 @@ public class PlayerCardsSelect : MonoBehaviour
         {
             m_cardSelectNumber++;
         }
-        else if (Input.GetKeyDown(KeyCode.Space))
+        else if (Input.GetKeyDown(KeyCode.Space) || _canvasManager.timeLimit)
         {
             // カード選択決定
             SelectCardSetUp();
 
-            _gameManager.SetPlayerCard(m_cardSelectNumber);
+            _gameManager.SetplayerCardsSelect(_cardStatus[m_cardSelectNumber]);
+
+            _canvasManager.timeLimit = false;
         }
         
         // カード選択の範囲を0～3に制限

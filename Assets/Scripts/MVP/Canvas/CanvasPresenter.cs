@@ -30,9 +30,9 @@ public class CanvasPresenter : MonoBehaviour
             _view.UpdateTurnText(turnNumber);
         }).AddTo(this);
 
-        //_model.FinallApha.Subscribe(alpha =>
-        //{
-        //    _view.UpdateFadeOutAlpha(alpha);
-        //}).AddTo(this);
+        _model.FinallApha.Subscribe(alpha =>
+        {
+            _view.UpdateFadeOutAlpha(alpha);
+        }).AddTo(this);
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -18,9 +19,8 @@ public class GameManager : MonoBehaviour
     [Header("カメラスクリプト"), SerializeField]
     PlayerCamera _playerCamera;
 
-
-    private int? _playerCardNumber;
-    private int? _aiCardNumber;
+    private CardStatus _setPlayerCard;
+    private CardStatus _setAiCard;
 
 
     /// <summary>
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         _menuCanvas.SetActive(false);
         Cursor.visible = false;
 
-        _canvasModel.AddTurnNumber();
+        //_canvasModel.AddTurnNumber();
 
         // AIのカードを選択
         _aiCardsSelect.SelectCard();
@@ -47,54 +47,44 @@ public class GameManager : MonoBehaviour
         _canvasModel = model;
     }
 
-    /// <summary>
-    /// プレイヤーのカード番号をセット
-    /// </summary>
-    public void SetPlayerCard(int playerCardNumber = 0)
+
+    public void SetplayerCardsSelect(CardStatus playerCard)
     {
-        _playerCardNumber = playerCardNumber;
+        _setPlayerCard = playerCard;
 
         TryJudge();
     }
 
 
-    /// <summary>
-    /// AIのカード番号をセット
-    /// </summary>
-    public void SetAiCard(int aiCardNumber)
+    public void SetAiCardsSelect(CardStatus aiCard)
     {
-        _aiCardNumber = aiCardNumber;
+        _setAiCard = aiCard;
 
         TryJudge();
     }
-
 
     /// <summary>
     /// 判定開始
     /// </summary>
-    private void TryJudge()
+    public void TryJudge()
     {
-        if (_playerCardNumber == null || _aiCardNumber == null)
+        if (_setPlayerCard == null || _setAiCard == null)
         {
-            Debug.Log("ぬるぽ");
             return;
         }
 
-        Debug.Log("のっとぬるぽ");
-        // 勝敗判定
-        _cardsAffinity.CardsJudge(_playerCardNumber.Value, _aiCardNumber.Value);
-        var result = _cardsAffinity.CheckAndJudge();
+        int winner = _cardsAffinity.Hoge(_setPlayerCard.type, _setAiCard.type);
 
-        // 勝敗結果を表示
-        switch (result)
+
+        switch (winner)
         {
-            case CardsAffinity.JudgeResult.PlayerWin:
+            case 2:
                 ShowResultText("Your Win!");
                 break;
-            case CardsAffinity.JudgeResult.AiWin:
+            case 1:
                 ShowResultText("You Lose...");
                 break;
-            case CardsAffinity.JudgeResult.Draw:
+            case 0:
                 //ShowResultText("Draw");
                 break;
         }

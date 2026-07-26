@@ -12,6 +12,8 @@ public class AiCardsSelect : MonoBehaviour
     [Header("ゲームマネージャー"), SerializeField]
     public GameManager _gameManager;
 
+    [Header("ステータス"), SerializeField]
+    private List<CardStatus> _cardStatus;
 
     // カードの移動速度
     private float _cardMoveSpeed = 0.5f;
@@ -27,8 +29,8 @@ public class AiCardsSelect : MonoBehaviour
                     _cardMoveSpeed
                 );
 
-        _gameManager.SetAiCard(m_cardSelectNumber);
+        _gameManager.SetAiCardsSelect(_cardStatus[m_cardSelectNumber]);
 
-        _aiCardObjects.RemoveAt(m_cardSelectNumber);
+        //_aiCardObjects.RemoveAt(m_cardSelectNumber);
     } 
 }

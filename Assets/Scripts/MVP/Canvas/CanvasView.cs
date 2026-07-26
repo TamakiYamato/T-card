@@ -13,10 +13,10 @@ public class CanvasView : MonoBehaviour
     }
 
 
-    //public void UpdateFadeOutAlpha(float alpha)
-    //{
-    //    // ここでフェードアウトのアルファ値を更新する処理を実装
-    //    // 例: CanvasGroupのalphaプロパティを更新するなど
-    //    _turnText.alpha = alpha;
-    //}
+    public void UpdateFadeOutAlpha(float alpha)
+    {
+        // ここでフェードアウトのアルファ値を更新する処理を実装
+        // 例: CanvasGroupのalphaプロパティを更新するなど
+        _turnText.alpha = alpha;
+    }
 }
