@@ -9,6 +9,9 @@ public class PlayerCardsSelect : MonoBehaviour
     [Header("カード"), SerializeField]
     private List<GameObject> _cardObjects;
 
+    [Header("ステータス"), SerializeField]
+    private List<CardStatus> _cardStatus;
+
     [Header("ターゲット"),SerializeField]
     public GameObject _cardsMoveTargetObj;
 
@@ -23,15 +26,15 @@ public class PlayerCardsSelect : MonoBehaviour
 
 
     // カード選択の番号
-    int m_cardSelectNumber = 0;
+    private int _cardSelectNumber = 0;
+
+    private int _setCardSelectNumber = 0;
 
     private int _maxCardSelectNumber = 3;
 
     // カードの移動速度
     static private float _cardMoveSpeed = 0.5f;
 
-    [Header("ステータス"), SerializeField]
-    private List<CardStatus> _cardStatus;
 
     /// <summary>
     /// Update
@@ -49,24 +52,27 @@ public class PlayerCardsSelect : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            m_cardSelectNumber--;
+            _cardSelectNumber--;
         }
         else if (Input.GetKeyDown(KeyCode.D))
         {
-            m_cardSelectNumber++;
+            _cardSelectNumber++;
         }
         else if (Input.GetKeyDown(KeyCode.Space) || _canvasManager.timeLimit)
         {
+            // 選択したカードの番号を保存
+            _setCardSelectNumber = _cardSelectNumber;
+
             // カード選択決定
             SelectCardSetUp();
 
-            _gameManager.SetplayerCardsSelect(_cardStatus[m_cardSelectNumber]);
+            _gameManager.SetplayerCardsSelect(_cardStatus[_cardSelectNumber]);
 
             _canvasManager.timeLimit = false;
         }
         
         // カード選択の範囲を0～3に制限
-        m_cardSelectNumber = Mathf.Clamp(m_cardSelectNumber, 0, _maxCardSelectNumber);
+        _cardSelectNumber = Mathf.Clamp(_cardSelectNumber, 0, _maxCardSelectNumber);
 
         OutlineSetUp();
     }
@@ -77,7 +83,7 @@ public class PlayerCardsSelect : MonoBehaviour
     /// </summary>
     private void OutlineSetUp()
     {
-        _showCardOutline.ShowOutline(_cardObjects[m_cardSelectNumber]);
+        _showCardOutline.ShowOutline(_cardObjects[_cardSelectNumber]);
     }
 
 
@@ -86,10 +92,20 @@ public class PlayerCardsSelect : MonoBehaviour
     /// </summary>
     private void SelectCardSetUp()
     {
-        _cardObjects[m_cardSelectNumber].transform.position = Vector3.MoveTowards(
-                _cardObjects[m_cardSelectNumber].transform.position,
+        _cardObjects[_cardSelectNumber].transform.position = Vector3.MoveTowards(
+                _cardObjects[_cardSelectNumber].transform.position,
                 _cardsMoveTargetObj.transform.position,
                 _cardMoveSpeed
             );
+    }
+
+
+    /// <summary>
+    /// 一度選択したカードを無効にする
+    /// </summary>
+    public void Disable()
+    {
+        // 選択したカードを無効にする
+        _cardObjects[_setCardSelectNumber].SetActive(false);
     }
 }

@@ -5,15 +5,16 @@ public class AiCardsSelect : MonoBehaviour
 {
     [Header("AIのカード"), SerializeField]
     private List<GameObject> _aiCardObjects;
-    
+
+    [Header("ステータス"), SerializeField]
+    private List<CardStatus> _cardStatus;
+
     [Header("移動時の目標ターゲット"),SerializeField]
     public GameObject _aiCardsMoveTargetObj;
 
     [Header("ゲームマネージャー"), SerializeField]
     public GameManager _gameManager;
 
-    [Header("ステータス"), SerializeField]
-    private List<CardStatus> _cardStatus;
 
     // カードの移動速度
     private float _cardMoveSpeed = 0.5f;

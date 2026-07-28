@@ -2956,15 +2956,15 @@ MonoBehaviour:
   - {fileID: 550806399}
   - {fileID: 1324919930}
   - {fileID: 1669742107}
-  _cardsMoveTargetObj: {fileID: 1445091990}
-  _showCardOutline: {fileID: 1859523744}
-  _gameManager: {fileID: 1859523746}
-  _canvasManager: {fileID: 2113446128}
   _cardStatus:
   - {fileID: 1011218785}
   - {fileID: 550806403}
   - {fileID: 1324919935}
   - {fileID: 1669742112}
+  _cardsMoveTargetObj: {fileID: 1445091990}
+  _showCardOutline: {fileID: 1859523744}
+  _gameManager: {fileID: 1859523746}
+  _canvasManager: {fileID: 2113446128}
 --- !u!114 &1859523744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3000,13 +3000,13 @@ MonoBehaviour:
   - {fileID: 1323013029}
   - {fileID: 1993694142}
   - {fileID: 945183670}
-  _aiCardsMoveTargetObj: {fileID: 376584447}
-  _gameManager: {fileID: 1859523746}
   _cardStatus:
   - {fileID: 1104668776}
   - {fileID: 1323013030}
   - {fileID: 1993694143}
   - {fileID: 945183671}
+  _aiCardsMoveTargetObj: {fileID: 376584447}
+  _gameManager: {fileID: 1859523746}
 --- !u!114 &1859523746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3021,6 +3021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JudgeSystem
   _aiCardsSelect: {fileID: 1859523745}
   _menuCanvas: {fileID: 879405978}
+  _playerCardsSelect: {fileID: 1859523743}
   _resultText: {fileID: 1511017124}
   _playerCamera: {fileID: 123512394}
 --- !u!1 &1877145533

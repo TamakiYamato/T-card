@@ -14,20 +14,20 @@ public  class CardsAffinity
     }
 
 
-    public int Hoge(CardType playerCardType, CardType aiCardType)
+    public JudgeResult Judge(CardType playerCardType, CardType aiCardType)
     {
         if(playerCardType == CardType.King && aiCardType == CardType.Citizen ||
            playerCardType == CardType.Citizen && aiCardType == CardType.Slave)
         {
-            return 2;
+            return JudgeResult.PlayerWin;
         }
 
         if(playerCardType == CardType.King && aiCardType == CardType.Slave)
         {
-            return 1;
+            return JudgeResult.AiWin;
         }
 
-        return 0;
+        return JudgeResult.Draw;
 
 
     }

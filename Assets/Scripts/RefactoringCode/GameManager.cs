@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     [Header("キャンバス"), SerializeField]
     GameObject _menuCanvas;
 
+    [Header("プレイヤーのカード選択スクリプト"), SerializeField]
+    PlayerCardsSelect _playerCardsSelect;
+
     [Header("リザルトテキスト"), SerializeField]
     TextMeshProUGUI _resultText;
 
@@ -73,19 +76,20 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        int winner = _cardsAffinity.Hoge(_setPlayerCard.type, _setAiCard.type);
+        var winner = _cardsAffinity.Judge(_setPlayerCard.type, _setAiCard.type);
 
 
         switch (winner)
         {
-            case 2:
+            case CardsAffinity.JudgeResult.PlayerWin:
                 ShowResultText("Your Win!");
                 break;
-            case 1:
+            case CardsAffinity.JudgeResult.AiWin:
                 ShowResultText("You Lose...");
                 break;
-            case 0:
-                //ShowResultText("Draw");
+            case CardsAffinity.JudgeResult.Draw:
+                Debug.Log("Draw");
+                _playerCardsSelect.Disable();
                 break;
         }
     }
