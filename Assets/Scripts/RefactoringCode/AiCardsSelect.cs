@@ -15,6 +15,8 @@ public class AiCardsSelect : MonoBehaviour
     [Header("ゲームマネージャー"), SerializeField]
     public GameManager _gameManager;
 
+    // 
+    private int _setCardSelectNumber = 0;
 
     // カードの移動速度
     private float _cardMoveSpeed = 0.5f;
@@ -23,15 +25,29 @@ public class AiCardsSelect : MonoBehaviour
     public void SelectCard()
     {
         // カードのリスト範囲でランダムに選出
-        int m_cardSelectNumber = Random.Range(0, _aiCardObjects.Count);
-        _aiCardObjects[m_cardSelectNumber].transform.position = Vector3.MoveTowards(
-                    _aiCardObjects[m_cardSelectNumber].transform.position,
+        int _cardSelectNumber = Random.Range(0, _aiCardObjects.Count);
+        //int _cardSelectNumber = Random.Range(1, _aiCardObjects.Count);
+
+        // 選択したカードの番号を保存
+        _setCardSelectNumber = _cardSelectNumber;
+
+        _aiCardObjects[_cardSelectNumber].transform.position = Vector3.MoveTowards(
+                    _aiCardObjects[_cardSelectNumber].transform.position,
                     _aiCardsMoveTargetObj.transform.position,
                     _cardMoveSpeed
                 );
 
-        _gameManager.SetAiCardsSelect(_cardStatus[m_cardSelectNumber]);
+        _gameManager.SetAiCardsSelect(_cardStatus[_cardSelectNumber]);
+    }
 
-        //_aiCardObjects.RemoveAt(m_cardSelectNumber);
-    } 
+
+    public void Disable()
+    {
+        // 選択したカードを無効にする
+        _aiCardObjects[_setCardSelectNumber].SetActive(false);
+
+        // 選択したカードとそのステータスをリストから削除
+        _aiCardObjects.RemoveAt(_setCardSelectNumber);
+        _cardStatus.RemoveAt(_setCardSelectNumber);
+    }
 }

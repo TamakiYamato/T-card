@@ -20,7 +20,7 @@ public class CanvasManager : MonoBehaviour
 
     private void CountDown()
     {
-        //_selectLimitTime -= Time.deltaTime;
+        _selectLimitTime -= Time.deltaTime;
 
         if(_selectLimitTime < 0)
         {

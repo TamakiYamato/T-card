@@ -15,7 +15,7 @@ public class PlayerCardsSelect : MonoBehaviour
     [Header("ターゲット"),SerializeField]
     public GameObject _cardsMoveTargetObj;
 
-    [Header("ターゲット"), SerializeField]
+    [Header("アウトライン"), SerializeField]
     public ShowCardOutline _showCardOutline;
 
     [Header("ゲームマネージャー"), SerializeField]
@@ -66,12 +66,13 @@ public class PlayerCardsSelect : MonoBehaviour
             // カード選択決定
             SelectCardSetUp();
 
+            // GameManagerのメゾットに選択したカードの属性を渡す
             _gameManager.SetplayerCardsSelect(_cardStatus[_cardSelectNumber]);
 
             _canvasManager.timeLimit = false;
         }
         
-        // カード選択の範囲を0～3に制限
+        // カード選択の範囲をカードの残り枚数に制限
         _cardSelectNumber = Mathf.Clamp(_cardSelectNumber, 0, _maxCardSelectNumber);
 
         OutlineSetUp();
@@ -101,11 +102,17 @@ public class PlayerCardsSelect : MonoBehaviour
 
 
     /// <summary>
-    /// 一度選択したカードを無効にする
+    /// 一度選択したカードを無効にする(引き分けの場合のみ呼ばれるメゾット)
     /// </summary>
     public void Disable()
     {
         // 選択したカードを無効にする
         _cardObjects[_setCardSelectNumber].SetActive(false);
+
+        // 選択したカードとそのステータスをリストから削除
+        _cardObjects.RemoveAt(_setCardSelectNumber);
+        _cardStatus.RemoveAt(_setCardSelectNumber);
+
+        _maxCardSelectNumber--;
     }
 }

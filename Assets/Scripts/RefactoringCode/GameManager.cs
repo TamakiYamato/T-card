@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,39 +8,23 @@ public class GameManager : MonoBehaviour
     private CanvasModel _canvasModel;
     private CardsAffinity _cardsAffinity = new CardsAffinity();
 
+    [Header("プレイヤーのカード選択スクリプト"), SerializeField]
+    PlayerCardsSelect _playerCardsSelect;
+
     [Header("AI選択クラス"), SerializeField]
     private AiCardsSelect _aiCardsSelect;
 
     [Header("キャンバス"), SerializeField]
     GameObject _menuCanvas;
 
-    [Header("プレイヤーのカード選択スクリプト"), SerializeField]
-    PlayerCardsSelect _playerCardsSelect;
-
     [Header("リザルトテキスト"), SerializeField]
     TextMeshProUGUI _resultText;
 
-    [Header("カメラスクリプト"), SerializeField]
-    PlayerCamera _playerCamera;
+    [Header("カウントダウン"), SerializeField]
+    CanvasManager _canvasManager;
 
-    private CardStatus _setPlayerCard;
-    private CardStatus _setAiCard;
-
-
-    /// <summary>
-    /// Start
-    /// </summary>
-    private void Start()
-    {
-        // キャンバスとマウスカーソルは最初は非表示
-        _menuCanvas.SetActive(false);
-        Cursor.visible = false;
-
-        //_canvasModel.AddTurnNumber();
-
-        // AIのカードを選択
-        _aiCardsSelect.SelectCard();
-    }
+    private CardStatus? _setPlayerCard;
+    private CardStatus? _setAiCard;
 
 
     /// <summary>
@@ -51,11 +36,32 @@ public class GameManager : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Start
+    /// </summary>
+    private void Start()
+    {
+        // キャンバスとマウスカーソルは最初は非表示
+        _menuCanvas.SetActive(false);
+        Cursor.visible = false;
+
+        StartTurn();
+    }
+
+    private void StartTurn()
+    {
+        _canvasModel.AddTurnNumber();
+
+        // AIのカードを選択
+        _aiCardsSelect.SelectCard();
+    }
+
+
     public void SetplayerCardsSelect(CardStatus playerCard)
     {
         _setPlayerCard = playerCard;
 
-        TryJudge();
+        Judge();
     }
 
 
@@ -63,13 +69,21 @@ public class GameManager : MonoBehaviour
     {
         _setAiCard = aiCard;
 
-        TryJudge();
+        Judge();
     }
+
+
+    private void ResetCardStetus()
+    {
+        _setPlayerCard = null;
+        _setAiCard = null;
+    }
+    
 
     /// <summary>
     /// 判定開始
     /// </summary>
-    public void TryJudge()
+    public void Judge()
     {
         if (_setPlayerCard == null || _setAiCard == null)
         {
@@ -81,15 +95,27 @@ public class GameManager : MonoBehaviour
 
         switch (winner)
         {
+            // 判定結果に応じて処理を分岐
+            // プレイヤーの勝利
             case CardsAffinity.JudgeResult.PlayerWin:
                 ShowResultText("Your Win!");
                 break;
+
+            // AIの勝利
             case CardsAffinity.JudgeResult.AiWin:
                 ShowResultText("You Lose...");
                 break;
+
+            // 引き分け
             case CardsAffinity.JudgeResult.Draw:
-                Debug.Log("Draw");
+
                 _playerCardsSelect.Disable();
+                _aiCardsSelect.Disable();
+
+                // カードの状態をリセット
+                ResetCardStetus();
+
+                StartTurn();
                 break;
         }
     }
@@ -100,11 +126,13 @@ public class GameManager : MonoBehaviour
     /// <summary>
     private void ShowResultText(string resultText = "")
     {
+        // カウントダウンを無効化
+        _canvasManager.enabled = false;
+
         // リザルトとマウスカーソルを表示
         _menuCanvas.SetActive(true);
         _resultText.text = resultText;
-        Cursor.visible = true;
 
-        _playerCamera.enabled = false;
+        Cursor.visible = true;
     }
 }
