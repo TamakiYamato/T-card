@@ -11,42 +11,38 @@ public class CardView : MonoBehaviour
     public  GameObject[] _cardObjects;
 
     [Header("カードの移動ポイント"), SerializeField]
-    public  GameObject _cardMovePoint;
+    public  Transform _cardMovePoint;
 
     [Header("アウトラインコンポーネント"), SerializeField]
     private Outline[] _outlineComponent;
 
-    int m_cardSelectNumber = 0;
 
     // スペースキーを押したときのイベントを発行するObservable
-    // A、D、スペース
+    // A、D、Space
     public Observable<Unit> _pushRightKey => 
         Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.D));
-
     public Observable<Unit> _pushLeftKey =>
         Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.A));
-
     public Observable<Unit> _pushSpaceKey =>
         Observable.EveryUpdate().Where(_ => Input.GetKeyDown(KeyCode.Space));
 
 
-    public void SetHogeNumber(int cardSelectNumber) => ShowSelectCardNumber(cardSelectNumber);
+    public void SetHogeNumber(int cardSelectNumber) => ShowOutlineCardNumber(cardSelectNumber);
 
 
     /// <summary>
-    /// 
+    /// カードのアウトラインを表示
     /// </summary>
-    public void ShowSelectCardNumber(int hogeNumber)
+    public void ShowOutlineCardNumber(int _showOutlineCardNumber)
     {
 
         for (int i = 0; i < _outlineComponent.Length; i++)
         {
-            if (i == hogeNumber)
+            if (i == _showOutlineCardNumber)
             {
                 _outlineComponent[i].enabled = true;
 
-                Debug.Log($"hogeNumber: {hogeNumber}");
-
+                Debug.Log($"hogeNumber: {_showOutlineCardNumber}");
             }
             else
             {

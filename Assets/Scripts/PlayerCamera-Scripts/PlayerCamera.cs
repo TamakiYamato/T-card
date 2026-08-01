@@ -30,7 +30,6 @@ public class PlayerCamera : MonoBehaviour
     {
         // マウスカーソルを消す
         Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
     }
 
 
